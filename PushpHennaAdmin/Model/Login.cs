@@ -41,7 +41,7 @@ namespace PushpHennaAdmin.Model
         public string ADDRESS { get; set; }
         public string AGE { get; set; }
     }
-    
+
     public class SSOModel
     {
         public string Token { get; set; }
@@ -90,15 +90,25 @@ namespace PushpHennaAdmin.Model
     public class RegisterUser
     {
         public int userid { get; set; }
-        public string name { get; set; }
-        public string password { get; set; }
-        public string mobile { get; set; }
-        public string email { get; set; }
-        public string ssoid { get; set; }
+        public string NAME { get; set; }
+        public string PASSWORD { get; set; }
+        public string MOBILE { get; set; }
+        public string PHONE { get; set; }
+        public string EMAIL { get; set; }
+        public string PINCODE { get; set; }
+        public string ADDRESS { get; set; }
+        public string STATEID { get; set; }
+        public string CITYID { get; set; }
+        public string DISTRICT_ID { get; set; }
+        public string ROLEID { get; set; }
+        public string WORKFOR { get; set; }
+        public string WORKFORID { get; set; }
+        public string USERTYPEID { get; set; }
         public string mode { get; set; }
+        public string ssoid { get; set; }
         public int applicationid { get; set; }
-        public string createdby { get; set; }
-        public string ipaddress { get; set; }
+        public string CREATEDBY { get; set; }
+        public string IPADDRESS { get; set; }
         public string username { get; set; }
         public bool isbiomatric { get; set; }
         public string aadhaar { get; set; }
@@ -144,7 +154,7 @@ namespace PushpHennaAdmin.Model
     {
         public string tokennumber { get; set; }
     }
-   
+
     public class DashBoard
     {
         public int userid { get; set; }
@@ -164,7 +174,7 @@ namespace PushpHennaAdmin.Model
         public int? SSOResult { get; set; }
     }
 
-   
+
 
     public class UserActiveModel
     {

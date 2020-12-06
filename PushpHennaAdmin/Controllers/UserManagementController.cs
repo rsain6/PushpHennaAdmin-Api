@@ -112,11 +112,11 @@ namespace PushpHennaAdmin.Controllers
                 RegisterUser objRegisterUser = new RegisterUser();
                 objRegisterUser.aadhaar = objUserActionModel.aadhaar;
                 objRegisterUser.isbiomatric = objUserActionModel.isbiomatric;
-                objRegisterUser.createdby = objUserActionModel.createdby;
-                objRegisterUser.ipaddress = objUserActionModel.ipaddress;
+                objRegisterUser.CREATEDBY = objUserActionModel.createdby;
+                objRegisterUser.IPADDRESS = objUserActionModel.ipaddress;
                 objRegisterUser.ssoid = objUserActionModel.ssoid;
-                objRegisterUser.email = "";
-                objRegisterUser.password = "";
+                objRegisterUser.EMAIL = "";
+                objRegisterUser.PASSWORD = "";
                 UpdateUser(objRegisterUser);
             }
             catch (Exception ex)
@@ -185,39 +185,30 @@ namespace PushpHennaAdmin.Controllers
             string resultAPI = string.Empty;
             try
             {
-                if (string.IsNullOrEmpty(objRegisterUser.ssoid))
-                {
-                    objReponseModel.USERID = 0;
-                    objReponseModel.MSG = "Invalid SSO.";
-                }
-                else
-                {
-                    resultAPI = CheckUser(objRegisterUser);
-                    if (resultAPI == "0")
-                    {
-                        objReponseModel.USERID = 0;
-                        objReponseModel.MSG = "USER ALREADY EXISTS.";
-                    }
-                    else
-                    {
+             
                         SqlParameter[] spparams = {
-                                                    new SqlParameter("@USERID",objRegisterUser.userid),
-                                                    new SqlParameter("@NAME",objRegisterUser.name),
-                                                    new SqlParameter("@PASSWORD",objRegisterUser.password),
-                                                    new SqlParameter("@MOBILE",objRegisterUser.mobile),
-                                                    new SqlParameter("@EMAIL",objRegisterUser.email),
-                                                    new SqlParameter("@SSOID",objRegisterUser.ssoid),
-                                                    new SqlParameter("@ISBIOMATRIC",objRegisterUser.isbiomatric),
-                                                    new SqlParameter("@AADHAAR",objRegisterUser.aadhaar),
-                                                    new SqlParameter("@MODE",objRegisterUser.mode),
-                                                    new SqlParameter("@CREATEDBY",objRegisterUser.createdby),
-                                                    new SqlParameter("@IPADDRESS",objRegisterUser.ipaddress),
+                                             
+                                                    new SqlParameter("@NAME",objRegisterUser.NAME),
+                                                    new SqlParameter("@PASSWORD",objRegisterUser.PASSWORD),
+                                                    new SqlParameter("@MOBILE",objRegisterUser.MOBILE),
+                                                    new SqlParameter("@PHONE",objRegisterUser.PHONE),
+                                                    new SqlParameter("@EMAIL",objRegisterUser.EMAIL),
+                                                    new SqlParameter("@ADDRESS",objRegisterUser.ADDRESS),
+                                                    new SqlParameter("@PINCODE",objRegisterUser.PINCODE),
+                                                    new SqlParameter("@STATEID",objRegisterUser.STATEID),
+                                                    new SqlParameter("@CITYID",objRegisterUser.CITYID),
+                                                    new SqlParameter("@DISTRICT_ID",objRegisterUser.DISTRICT_ID),
+                                                    new SqlParameter("@ROLEID",objRegisterUser.ROLEID),
+                                                    new SqlParameter("@WORKFOR",objRegisterUser.WORKFOR),
+                                                    new SqlParameter("@WORKFORID",objRegisterUser.WORKFORID),
+                                                    new SqlParameter("@USERTYPEID",objRegisterUser.USERTYPEID),
+                                                    new SqlParameter("@CREATEDBY",objRegisterUser.CREATEDBY),
+                                                    new SqlParameter("@IPADDRESS",objRegisterUser.IPADDRESS),
                                                     new SqlParameter("@RESULTMSG","")
                                                 };
                         outPut = objDAL.PostWithResultCode(connection, "USER_I", spparams);
                         return Json(outPut);
-                    }
-                }
+   
             }
             catch (Exception ex)
             {
@@ -239,13 +230,13 @@ namespace PushpHennaAdmin.Controllers
                 {
                     string objVM = JsonConvert.SerializeObject(new
                     {
-                        email = objRegisterUser.email,
-                        password = objRegisterUser.password,
+                        email = objRegisterUser.EMAIL,
+                        password = objRegisterUser.PASSWORD,
                         ssoid = objRegisterUser.ssoid,                       
                         applicationid = 1003, // 3 For MEDICAL on Live And 4 For Medical on Staging and Local
                         IsBiomatric = objRegisterUser.isbiomatric,
-                        createdby = objRegisterUser.createdby,
-                        ipaddress = objRegisterUser.ipaddress,
+                        createdby = objRegisterUser.CREATEDBY,
+                        ipaddress = objRegisterUser.IPADDRESS,
                         aadhaar = objRegisterUser.aadhaar
                     });
 
@@ -254,7 +245,7 @@ namespace PushpHennaAdmin.Controllers
                     streamWriter.Close();
 
                     var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-
+                    //
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                     {
 
@@ -289,13 +280,13 @@ namespace PushpHennaAdmin.Controllers
                 {
                     string objVM = JsonConvert.SerializeObject(new
                     {
-                        email = objRegisterUser.email,
-                        password = objRegisterUser.password,
+                        email = objRegisterUser.EMAIL,
+                        password = objRegisterUser.PASSWORD,
                         ssoid = objRegisterUser.ssoid,
                         applicationid = 3, // 3 For MEDICAL on Live And 4 For Medical on Staging and Local
                         IsBiomatric = objRegisterUser.isbiomatric,
-                        createdby = objRegisterUser.createdby,
-                        ipaddress = objRegisterUser.ipaddress,
+                        createdby = objRegisterUser.CREATEDBY,
+                        ipaddress = objRegisterUser.IPADDRESS,
                         aadhaar = objRegisterUser.aadhaar
                     });
 
