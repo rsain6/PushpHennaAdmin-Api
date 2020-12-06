@@ -89,7 +89,7 @@ namespace PushpHennaAdmin.Model
     }
     public class RegisterUser
     {
-        public int userid { get; set; }
+        public int USERID { get; set; }
         public string NAME { get; set; }
         public string PASSWORD { get; set; }
         public string MOBILE { get; set; }

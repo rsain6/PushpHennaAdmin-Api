@@ -170,11 +170,11 @@ namespace PushpHennaAdmin.Controllers
         }
         #endregion
 
-        #region Register user without SSO 
+        #region Register user with email 
         /// <summary>
-        /// Register user  without SSO 
+        /// Register user  without email id 
         /// </summary>
-        /// <param name="objRegisterUser">name,password,mobile,email,ssoid(if exists),mode,cretaed by,ipaddress</param>
+        /// <param name="objRegisterUser"></param>
         /// <returns> userid with success msg</returns>
         [HttpPost, Authorize(Policy = "JwtAuth")]
         [Route("SaveUserData")]
@@ -218,6 +218,52 @@ namespace PushpHennaAdmin.Controllers
             return Json(objReponseModel);
         }
         #endregion
+        /// <summary>
+        /// Register user  without email id 
+        /// </summary>
+        /// <param name="objRegisterUser"></param>
+        /// <returns> userid with success msg</returns>
+        [HttpPost, Authorize(Policy = "JwtAuth")]
+        [Route("UpdateUserData")]
+        public JsonResult UpdateUserData([FromBody] RegisterUser objRegisterUser)
+        {
+            ReponseModel objReponseModel = new ReponseModel();
+            string outPut = string.Empty;
+            string resultAPI = string.Empty;
+            try
+            {
+
+                SqlParameter[] spparams = {
+                                                    new SqlParameter("@USERID",objRegisterUser.USERID),
+                                                    new SqlParameter("@NAME",objRegisterUser.NAME),
+                                                    new SqlParameter("@PASSWORD",objRegisterUser.PASSWORD),
+                                                    new SqlParameter("@MOBILE",objRegisterUser.MOBILE),
+                                                    new SqlParameter("@PHONE",objRegisterUser.PHONE),
+                                                    new SqlParameter("@EMAIL",objRegisterUser.EMAIL),
+                                                    new SqlParameter("@ADDRESS",objRegisterUser.ADDRESS),
+                                                    new SqlParameter("@PINCODE",objRegisterUser.PINCODE),
+                                                    new SqlParameter("@STATEID",objRegisterUser.STATEID),
+                                                    new SqlParameter("@CITYID",objRegisterUser.CITYID),
+                                                    new SqlParameter("@DISTRICT_ID",objRegisterUser.DISTRICT_ID),
+                                                    new SqlParameter("@ROLEID",objRegisterUser.ROLEID),
+                                                    new SqlParameter("@WORKFOR",objRegisterUser.WORKFOR),
+                                                    new SqlParameter("@WORKFORID",objRegisterUser.WORKFORID),
+                                                    new SqlParameter("@USERTYPEID",objRegisterUser.USERTYPEID),
+                                                    new SqlParameter("@CREATEDBY",objRegisterUser.CREATEDBY),
+                                                    new SqlParameter("@IPADDRESS",objRegisterUser.IPADDRESS),
+                                                    new SqlParameter("@RESULTMSG","")
+                                                };
+                outPut = objDAL.PostWithResultCode(connection, "USER_I", spparams);
+                return Json(outPut);
+
+            }
+            catch (Exception ex)
+            {
+                objReponseModel.USERID = 0;
+                objReponseModel.MSG = ex.Message;
+            }
+            return Json(objReponseModel);
+        }
 
         public string CheckUser(RegisterUser objRegisterUser)
         {
